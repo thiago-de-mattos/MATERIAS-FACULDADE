@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Arena das Sombras</title>
+</head>
+<body>
+    <div class="dark-overlay"></div>
+    
+    <h1>⚔️ ARENA DAS SOMBRAS ⚔️</h1>
+
+    <!-- Tela de Seleção -->
+    <div id="selectionScreen">
+        <h2>ESCOLHA SEU GUERREIRO</h2>
+        <div class="character-grid" id="heroGrid">
+            <div class="character-card" data-class="Knight">
+                <div class="card-glow"></div>
+                <img src="assets/img/kinght.jpg" alt="Knight">
+                <h3>Knight</h3>
+                <div class="character-stats">
+                    <span class="stat-item">❤️ <strong>100</strong> HP</span>
+                    <span class="stat-item">⚔️ <strong>10</strong> ATK</span>
+                    <span class="stat-item">🛡️ <strong>8</strong> DEF</span>
+                </div>
+            </div>
+
+            <div class="character-card" data-class="Sorcerer">
+                <div class="card-glow"></div>
+                <img src="assets/img/mestre_dos_magos.png" alt="Sorcerer">
+                <h3>Sorcerer</h3>
+                <div class="character-stats">
+                    <span class="stat-item">❤️ <strong>80</strong> HP</span>
+                    <span class="stat-item">⚔️ <strong>15</strong> ATK</span>
+                    <span class="stat-item">🛡️ <strong>3</strong> DEF</span>
+                </div>
+            </div>
+
+            <div class="character-card" data-class="Paladin">
+                <div class="card-glow"></div>
+                <img src="assets/img/Paladin.avif" alt="Paladin">
+                <h3>Paladin</h3>
+                <div class="character-stats">
+                    <span class="stat-item">❤️ <strong>150</strong> HP</span>
+                    <span class="stat-item">⚔️ <strong>5</strong> ATK</span>
+                    <span class="stat-item">🛡️ <strong>15</strong> DEF</span>
+                </div>
+            </div>
+
+            <div class="character-card special-card" data-class="corrupt_Knight">
+                <div class="card-glow dark-glow"></div>
+                <img src="assets/img/guts.jpeg" alt="Corrupt Knight">
+                <h3>Corrupt Knight</h3>
+                <div class="special-badge">⚠️ HABILIDADE ESPECIAL</div>
+                <div class="character-stats">
+                    <span class="stat-item">❤️ <strong>100</strong> HP</span>
+                    <span class="stat-item">⚔️ <strong>10</strong> ATK</span>
+                    <span class="stat-item">🛡️ <strong>8</strong> DEF</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 style="margin-top: 40px;">ESCOLHA SEU ADVERSÁRIO</h2>
+        <div class="character-grid" id="enemyGrid">
+            <div class="character-card enemy-card" data-class="LittleMonster">
+                <div class="card-glow enemy-glow"></div>
+                <img src="assets/img/esqueleto.jpeg" alt="Little Monster">
+                <h3>Little Monster</h3>
+                <div class="character-stats">
+                    <span class="stat-item">❤️ <strong>40</strong> HP</span>
+                    <span class="stat-item">⚔️ <strong>4</strong> ATK</span>
+                    <span class="stat-item">🛡️ <strong>4</strong> DEF</span>
+                </div>
+            </div>
+
+            <div class="character-card enemy-card" data-class="BigMonster">
+                <div class="card-glow enemy-glow"></div>
+                <img src="assets/img/rei lich.jpeg" alt="Big Monster">
+                <h3>Big Monster</h3>
+                <div class="character-stats">
+                    <span class="stat-item">❤️ <strong>120</strong> HP</span>
+                    <span class="stat-item">⚔️ <strong>16</strong> ATK</span>
+                    <span class="stat-item">🛡️ <strong>6</strong> DEF</span>
+                </div>
+            </div>
+        </div>
+
+        <button class="start-battle-btn" id="startBattleBtn" disabled>
+            <span>ENTRAR NA ARENA</span>
+        </button>
+    </div>
+    <!-- Tela de Batalha -->
+    <div id="battleScreen">
+        <div class="figthArea">
+            <div id="char" class="fighter-container">
+                <div class="fighter-border"></div>
+                <img class="fighter-image" id="heroImage" src="" alt="Hero">
+                <div class="lifebar">
+                    <div class="bar"></div>
+                </div>
+                <strong class="name">--</strong>
+                <div>
+                    <button class="attackbutton">⚔️ ATACAR</button>
+                </div>
+            </div>
+
+            <div id="monster" class="fighter-container">
+                <div class="fighter-border"></div>
+                <img class="fighter-image" id="monsterImage" src="" alt="Monster">
+                <div class="lifebar">
+                    <div class="bar"></div>
+                </div>
+                <strong class="name">--</strong>
+                <div>
+                    <button class="attackbutton">⚔️ ATACAR</button>
+                </div>
+            </div>
+        </div>
+
+        <ul class="log"></ul>
+        <button class="reset-btn" onclick="location.reload()">
+            🔄 NOVA BATALHA
+        </button>
+    </div>
+    <!-- Modal da Oferta das Trevas -->
+   <div id="darkModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-skull">⚔️</div>
+        <h2>A MARCA DO SACRIFÍCIO APARECE</h2>
+        <p class="dark-message">
+            <strong id="darkName"></strong>, as trevas observam sua determinação mesmo na morte...
+        </p>
+        <p class="dark-offer">
+            Uma força sombria oferece uma troca: <strong>sua humanidade</strong> por uma segunda chance como <span class="berserk-text">BERSERK</span>.
+        </p>
+        <div class="warning-text">⚠️ Você carregará a Marca e se tornará um guerreiro amaldiçoado</div>
+        <div class="modal-buttons">
+            <button class="modal-accept" id="acceptDeal">
+                ACEITAR A MARCA
+            </button>
+            <button class="modal-refuse" id="refuseDeal">
+                RECUSAR
+            </button>
+        </div>
+    </div>
+</div>
+
+    <script src="assets/js/classes.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
