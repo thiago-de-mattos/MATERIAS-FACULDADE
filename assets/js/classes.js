@@ -47,7 +47,7 @@ class Knight extends Character {
         super(name, 'assets/img/knight.jpg');
         this.life = 100;
         this.attack = 10;
-        this.defense = 8;
+        this.defense = 10;
         this.maxlife = this.life;
     }
 }
@@ -56,8 +56,8 @@ class Sorcerer extends Character {
     constructor(name){
         super(name, 'assets/img/mestre_dos_magos.png');
         this.life = 80;
-        this.attack = 15;
-        this.defense = 3;
+        this.attack = 30;
+        this.defense = 2;
         this.maxlife = this.life;
     }
 }
@@ -66,7 +66,7 @@ class Paladin extends Character {
     constructor(name){
         super(name, 'assets/img/Paladin.avif');
         this.life = 150;
-        this.attack = 5;
+        this.attack = 8;
         this.defense = 15;
         this.maxlife = this.life;
     }
