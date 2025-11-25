@@ -1,6 +1,3 @@
-
-
-
 def pesquisa(lista, item_busca, index=0):
 
     if index == len(lista):
