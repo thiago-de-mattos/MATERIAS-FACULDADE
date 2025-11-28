@@ -118,11 +118,96 @@ class NotificacaoService:
 from abc import ABC, abstractmethod
 from typing import List
 
-
-
-# Exemplo de uso esperado:
-# from abc import ABC, abstractmethod
+# ============================================================================
+# SOLUÇÃO APLICANDO O DIP
+# ============================================================================
 # 
+# Agora NotificacaoService depende de uma abstração (Notificador),
+# não de implementações concretas. Isso permite:
+# - Adicionar novos canais sem modificar NotificacaoService
+# - Testar facilmente com mocks
+# - Trocar implementações facilmente
+#
+# ============================================================================
+
+class Notificador(ABC):
+    """
+    Interface/abstração que define o contrato para qualquer canal de notificação.
+    Módulos de alto nível dependem desta abstração, não de implementações concretas.
+    """
+    @abstractmethod
+    def enviar(self, destinatario: str, mensagem: str):
+        """
+        Envia uma notificação para o destinatário.
+        
+        Args:
+            destinatario: Endereço/número do destinatário
+            mensagem: Mensagem a ser enviada
+        """
+        pass
+
+
+class EmailService(Notificador):
+    """
+    Implementação concreta de Notificador para envio de emails.
+    Agora implementa a interface, não é mais uma classe independente.
+    """
+    def enviar(self, destinatario: str, mensagem: str):
+        """Envia email para o destinatário"""
+        print(f"Enviando email para {destinatario}: {mensagem}")
+        # Código real de envio de email aqui
+        # Pode usar SMTP, API do Gmail, SendGrid, etc
+
+
+class SMSService(Notificador):
+    """
+    Implementação concreta de Notificador para envio de SMS.
+    Agora implementa a interface, não é mais uma classe independente.
+    """
+    def enviar(self, destinatario: str, mensagem: str):
+        """Envia SMS para o número"""
+        print(f"Enviando SMS para {destinatario}: {mensagem}")
+        # Código real de envio de SMS aqui
+        # Pode usar Twilio, AWS SNS, etc
+
+
+class NotificacaoService:
+    """
+    Classe de alto nível que agora depende da ABSTRAÇÃO (Notificador),
+    não de implementações concretas (EmailService, SMSService).
+    
+    Recebe notificadores via INJEÇÃO DE DEPENDÊNCIA no construtor.
+    """
+    def __init__(self, notificadores: List[Notificador]):
+        """
+        Recebe uma lista de notificadores via construtor.
+        Depende da abstração, não de classes concretas!
+        """
+        self.notificadores = notificadores
+    
+    def notificar(self, destinatarios: dict, mensagem: str):
+        """
+        Notifica usando todos os canais disponíveis.
+        
+        Args:
+            destinatarios: Dicionário com chaves 'email', 'telefone', etc
+            mensagem: Mensagem a ser enviada
+        """
+        for notificador in self.notificadores:
+            # Determina o destinatário baseado no tipo de notificador
+            if isinstance(notificador, EmailService):
+                if 'email' in destinatarios:
+                    notificador.enviar(destinatarios['email'], mensagem)
+            elif isinstance(notificador, SMSService):
+                if 'telefone' in destinatarios:
+                    notificador.enviar(destinatarios['telefone'], mensagem)
+            else:
+                # Para novos tipos, pode usar um padrão ou mapeamento
+                # Por exemplo, se tiver 'whatsapp' no dicionário
+                tipo = type(notificador).__name__.replace('Service', '').lower()
+                if tipo in destinatarios:
+                    notificador.enviar(destinatarios[tipo], mensagem)
+
 # # Criar interface Notificador
 # # Fazer EmailService implementar Notificador
 # # Fazer SMSService implementar Notificador
