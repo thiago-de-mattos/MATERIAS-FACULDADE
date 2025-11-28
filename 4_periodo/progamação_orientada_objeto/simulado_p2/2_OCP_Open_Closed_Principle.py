@@ -84,7 +84,7 @@ class CalculadoraDesconto:
 
 # TODO: Implemente aqui sua solução aplicando o OCP
 
-from abc import ABC, abstractclassmethod, abstractmethod
+from abc import ABC,  abstractmethod
 
 class DescontoStrategy(ABC):
 

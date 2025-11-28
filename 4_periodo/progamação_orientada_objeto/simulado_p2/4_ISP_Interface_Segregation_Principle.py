@@ -114,8 +114,50 @@ class Robo(Trabalhador):
 # TODO: Implemente aqui sua solução aplicando o ISP
 # 
 # Exemplo de uso esperado:
-# from abc import ABC, abstractmethod
-# 
+from abc import ABC, abstractmethod
+
+class trabalhador(ABC):
+    @abstractmethod
+    def trabalhar(self):
+        """Método para trabalhar"""
+        pass
+
+class SerVivo(ABC):
+    @abstractmethod
+    def comer(self):
+        """Método para comer"""
+        pass
+    
+    @abstractmethod
+    def dormir(self):
+        """Método para dormir"""
+        pass
+
+class Humano(Trabalhador, SerVivo):
+    """
+    Humano implementa AMBAS as interfaces porque:
+    - Humanos trabalham (Trabalhador)
+    - Humanos comem e dormem (SerVivo)
+    """
+    def trabalhar(self):
+        return "Humano trabalhando..."
+    
+    def comer(self):
+        return "Humano comendo..."
+    
+    def dormir(self):
+        return "Humano dormindo..."
+    
+class Robo(Trabalhador):
+    """
+    Robo implementa APENAS a interface Trabalhador.
+    Não precisa implementar SerVivo porque robos não comem nem dormem.
+    Agora não é forçado a implementar métodos que não fazem sentido!
+    """
+    def trabalhar(self):
+        return "Robo trabalhando..."
+   
+
 # # Criar interfaces segregadas (ex: Trabalhador, SerVivo)
 # # Humano implementa Trabalhador + SerVivo
 # # Robo implementa apenas Trabalhador

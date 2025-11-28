@@ -113,7 +113,13 @@ class NotificacaoService:
 # ============================================================================
 
 # TODO: Implemente aqui sua solução aplicando o DIP
-# 
+
+
+from abc import ABC, abstractmethod
+from typing import List
+
+
+
 # Exemplo de uso esperado:
 # from abc import ABC, abstractmethod
 # 
