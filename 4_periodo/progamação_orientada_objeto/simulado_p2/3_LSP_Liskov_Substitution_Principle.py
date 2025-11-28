@@ -120,7 +120,9 @@ class Quadrado(Retangulo):
 # ============================================================================
 
 # TODO: Implemente aqui sua solução aplicando o LSP
-# 
+
+from abc import ABC, abstractmethod
+
 # Exemplo de uso esperado:
 # from abc import ABC, abstractmethod
 # 
