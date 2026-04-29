@@ -2,16 +2,17 @@ from pydantic import BaseModel
 from typing import Optional
 
 #Entrada: criação de uma tarefa
-class TarefaCreate(BaseModel):
-    titulo: str
+class InsetoCreate(BaseModel):
+    nome: str
     descricao: Optional[str] = None
+    Ordem: Optional[str] = None
 
 #Saída: Tarefa lida do banco
-class TarefaResponse(BaseModel):
+class InsetoResponse(BaseModel):
     id: int
-    titulo: str
+    nome: str
     descricao: Optional[str]
-    concluida: bool
+    ordem: Optional[str]
 
 class Config:
     from_attributes = True #lê do ORM
