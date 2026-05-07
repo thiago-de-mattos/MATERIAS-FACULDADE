@@ -1,0 +1,16 @@
+#API
+fastapi
+uvicorn[standard]
+
+#ORM e Banco
+sqlalchemy
+psycopg2-binary
+
+#migration
+alembic
+
+#Variáveis de Ambiente
+python-dotenv
+
+#validação de Email
+email-validator
